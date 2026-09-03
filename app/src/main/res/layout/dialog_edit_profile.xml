@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="26dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#E0E6F0"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="24dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="24dp"
+        android:paddingBottom="22dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            app:cardBackgroundColor="#111B6D"
+            app:cardCornerRadius="31dp"
+            app:cardElevation="4dp"
+            app:strokeWidth="0dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="Editar perfil"
+                android:padding="17dp"
+                android:src="@drawable/ic_person"
+                app:tint="@color/white" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="Editar perfil"
+            android:textColor="#0A0F45"
+            android:textSize="23sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:text="Actualiza tu nombre y celular para que el comité tenga tus datos correctos."
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Nombre completo"
+            android:textColor="#102A56"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.TaxiApp.TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            app:boxBackgroundColor="#F4F7FC"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/login_input_stroke"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_person"
+            app:startIconTint="@color/text_secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editNameInput"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Ingrese su nombre"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:paddingStart="0dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="#9AA3B2"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Celular"
+            android:textColor="#102A56"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.TaxiApp.TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            app:boxBackgroundColor="#F4F7FC"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/login_input_stroke"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_phone"
+            app:startIconTint="@color/text_secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editPhoneInput"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Ingrese su celular"
+                android:inputType="phone"
+                android:maxLength="9"
+                android:maxLines="1"
+                android:paddingStart="0dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="#9AA3B2"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancelEditProfileButton"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:text="Cancelar"
+                android:textAllCaps="false"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="16dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/saveEditProfileButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="Guardar"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:backgroundTint="#111B6D"
+                app:cornerRadius="16dp"
+                app:icon="@drawable/ic_check"
+                app:iconGravity="textEnd"
+                app:iconPadding="8dp"
+                app:iconTint="@color/white" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

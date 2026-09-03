@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#07111F">
+
+    <com.journeyapps.barcodescanner.DecoratedBarcodeView
+        android:id="@+id/barcodeScannerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="18dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="18dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:contentDescription="@string/app_logo"
+                android:src="@drawable/ic_taxiapp_logo"
+                app:tint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:fontFamily="sans-serif-black"
+                android:text="TaxiApp"
+                android:textColor="@color/blue_deep"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/qrBackButton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/bg_scan_close"
+            android:contentDescription="@string/back"
+            android:padding="11dp"
+            android:src="@drawable/ic_back"
+            app:tint="@color/white" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="132dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="Escanea el QR de la unidad"
+        android:textColor="@color/white"
+        android:textSize="22sp" />
+
+    <FrameLayout
+        android:id="@+id/scannerFrame"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_scan_frame_outline"
+        android:padding="10dp">
+
+        <View
+            android:id="@+id/scannerLine"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_scan_line" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/scannerStatusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:gravity="center"
+        android:text="Alinea el codigo dentro del marco"
+        android:textColor="@color/white_85"
+        android:textSize="14sp"
+        android:translationY="158dp" />
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/vehicleDetailsPanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="10dp"
+        app:strokeWidth="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/scannedPlateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-black"
+                        android:text="P1A-234"
+                        android:textColor="#0A0F45"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/scannedUnitText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Unidad registrada"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_points_badge"
+                    android:fontFamily="sans-serif-black"
+                    android:paddingStart="12dp"
+                    android:paddingTop="7dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="7dp"
+                    android:text="+3 pts"
+                    android:textColor="#0A0F45"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
+                android:background="#E5EAF2" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_home_icon_soft"
+                    android:contentDescription="Conductor"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person"
+                    app:tint="#111B6D" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Conductor"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/scannedDriverText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="Conductor asignado"
+                        android:textColor="#0F172A"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_home_icon_soft"
+                    android:contentDescription="Ruta"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_route"
+                    app:tint="#111B6D" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ruta actual"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/scannedRouteText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="Cura Mori - Catacaos"
+                        android:textColor="#0F172A"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reportScannedTripButton"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:text="Reportar"
+                    android:textAllCaps="false"
+                    android:textColor="#111B6D"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/ic_report"
+                    app:iconGravity="textStart"
+                    app:iconTint="#111B6D"
+                    app:strokeColor="#111B6D"
+                    app:strokeWidth="1dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/confirmScannedTripButton"
+                    android:layout_width="0dp"
+                    android:layout_height="54dp"
+                    android:layout_weight="1.45"
+                    android:text="Confirmar +3 pts"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="#111B6D"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/ic_points"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/white" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>
+
+
+

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    app:cardCornerRadius="26dp"
+    app:cardElevation="6dp"
+    app:strokeWidth="0dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_home_slider_container">
+
+        <ImageView
+            android:id="@+id/bannerImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/home_slider_title"
+            android:scaleType="centerCrop" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_home_slider_overlay" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="18dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:id="@+id/bannerCategoryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_home_slider_chip"
+                android:fontFamily="sans-serif-black"
+                android:paddingStart="10dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="5dp"
+                android:textColor="#0A0F45"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/bannerDetailText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_home_detail_pill"
+                android:fontFamily="sans-serif-bold"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
+                android:text="Ver detalle"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/bannerTitleText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-black"
+                android:maxLines="2"
+                android:textColor="@color/white"
+                android:textSize="21sp"
+                app:layout_constraintBottom_toTopOf="@id/bannerDescriptionText"
+                app:layout_constraintEnd_toStartOf="@id/bannerDetailText"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/bannerDescriptionText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/white_85"
+                android:textSize="13sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/bannerDetailText"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+
+
+
+

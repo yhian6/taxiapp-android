@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="22dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="32dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/tripSuccessCloseButton"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_back_button"
+                android:contentDescription="Cerrar"
+                android:padding="9dp"
+                android:src="@drawable/ic_back"
+                app:tint="@color/blue_primary" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-black"
+                android:text="TransPiura"
+                android:textColor="@color/blue_primary"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:background="@drawable/bg_icon_blue_soft"
+                android:padding="8dp"
+                android:src="@drawable/ic_points"
+                app:tint="@color/blue_primary" />
+
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/blue_track"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_detail_header_card"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingStart="22dp"
+                android:paddingTop="26dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="22dp">
+
+                <FrameLayout
+                    android:id="@+id/tripSuccessAnimationContainer"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/tripSuccessLottie"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_fileName="t6oHYiQic2.json"
+                        app:lottie_loop="true" />
+
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Viaje registrado"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tripSuccessDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Hoy, 08:30 AM"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/bg_detail_points_pill"
+                    android:gravity="center"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:text="+3 puntos ganados"
+                    android:textColor="#6B5200"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeColor="@color/card_stroke"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="18dp"
+                        android:layout_height="82dp"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/bg_timeline_dot_filled" />
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@color/blue_track" />
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="8dp"
+                            android:background="@drawable/bg_timeline_dot_outline" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0"
+                            android:text="INICIO"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Cura Mori"
+                            android:textColor="@color/blue_deep"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:letterSpacing="0"
+                            android:text="DESTINO"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:text="Catacaos"
+                            android:textColor="@color/blue_deep"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeColor="@color/card_stroke"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:text="DETALLES DEL VEHICULO"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/ic_route"
+                    app:drawableTint="@color/blue_primary" />
+
+                <TextView
+                    android:id="@+id/tripSuccessPlateText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="P1A-234"
+                    android:textColor="@color/blue_deep"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tripSuccessVehicleText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Hyundai Accent 2010 | Unidad 01"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="1dp"
+            app:strokeColor="@color/card_stroke"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <ImageView
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_icon_blue_soft"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_person"
+                    app:tint="@color/blue_primary" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0"
+                        android:text="CONDUCTOR"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tripSuccessDriverText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Conductor asignado"
+                        android:textColor="@color/blue_deep"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tripSuccessDriverPhoneText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical"
+                        android:text="Sin celular registrado"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        app:drawableStartCompat="@drawable/ic_phone"
+                        app:drawableTint="@color/blue_primary" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/tripSuccessDoneButton"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginTop="18dp"
+            android:text="Listo"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/blue_primary"
+            app:cornerRadius="16dp"
+            app:icon="@drawable/ic_check"
+            app:iconGravity="textStart"
+            app:iconTint="@color/white" />
+
+    </LinearLayout>
+
+</ScrollView>

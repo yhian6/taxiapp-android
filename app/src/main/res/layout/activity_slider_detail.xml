@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="310dp">
+
+            <ImageView
+                android:id="@+id/detailImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/detail_image"
+                android:scaleType="centerCrop" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_detail_overlay" />
+
+            <ImageButton
+                android:id="@+id/backButton"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_back_button"
+                android:contentDescription="@string/back"
+                android:padding="12dp"
+                android:src="@drawable/ic_back" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="-34dp"
+            android:layout_marginEnd="22dp"
+            android:background="@drawable/bg_login_card"
+            android:elevation="8dp"
+            android:orientation="vertical"
+            android:padding="22dp">
+
+            <TextView
+                android:id="@+id/detailCategoryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_points_badge"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
+                android:textColor="@color/green_dark"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/detailTitleText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/text_primary"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/detailDescriptionText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:lineSpacingExtra="4dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+

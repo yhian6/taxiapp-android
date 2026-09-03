@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="34dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="22dp"
+            android:paddingTop="30dp"
+            android:paddingEnd="22dp"
+            android:paddingBottom="18dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/profileContainer"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/greetingText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/home_greeting_default"
+                    android:textColor="@color/text_primary"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/statusText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Tus viajes ahora tienen recompensa."
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/profileContainer"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/card_stroke"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/app_logo"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_taxiapp_logo"
+                    app:tint="@color/blue_primary" />
+            </com.google.android.material.card.MaterialCardView>
+
+        </RelativeLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            app:cardCornerRadius="26dp"
+            app:cardElevation="10dp"
+            app:strokeWidth="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_home_points_hero"
+                android:paddingStart="22dp"
+                android:paddingTop="20dp"
+                android:paddingEnd="22dp"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:id="@+id/pointsBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_points_badge"
+                    android:fontFamily="sans-serif-bold"
+                    android:paddingStart="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="6dp"
+                    android:text="Tus puntos TaxiApp"
+                    android:textColor="@color/blue_deep"
+                    android:textSize="11sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/viewRewardsText"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:gravity="center"
+                    android:minHeight="36dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="Ver recompensas"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/pointsBadge"
+                    app:layout_constraintBottom_toBottomOf="@id/pointsBadge" />
+
+                <TextView
+                    android:id="@+id/pointsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif-black"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="48sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pointsBadge" />
+
+                <TextView
+                    android:id="@+id/pointsSubLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:text="puntos"
+                    android:textColor="@color/white_85"
+                    android:textSize="14sp"
+                    app:layout_constraintBaseline_toBaselineOf="@id/pointsText"
+                    app:layout_constraintStart_toEndOf="@id/pointsText" />
+
+                <LinearLayout
+                    android:id="@+id/tripsBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="@id/pointsText"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+                    <TextView
+                        android:id="@+id/tripsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="0 viajes"
+                        android:textColor="@color/white"
+                        android:textSize="19sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="este mes"
+                        android:textColor="@color/white_85"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/pointsProgress"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:max="100"
+                    android:progress="0"
+                    app:indicatorColor="@color/yellow_points"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pointsText"
+                    app:trackColor="@color/white_30"
+                    app:trackCornerRadius="4dp"
+                    app:trackThickness="6dp" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="118dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="26dp"
+            android:layout_marginEnd="42dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/scanQrButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_home_qr_card"
+                android:fontFamily="sans-serif-black"
+                android:gravity="center"
+                android:text="Escanear QR\nde viaje"
+                android:textAllCaps="false"
+                android:textColor="#6B5200"
+                android:textSize="20sp"
+                app:backgroundTint="@color/yellow_points"
+                app:cornerRadius="24dp"
+                app:icon="@drawable/ic_qr"
+                app:iconGravity="top"
+                app:iconPadding="8dp"
+                app:iconSize="36dp"
+                app:iconTint="#6B5200" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="22dp"
+            android:layout_marginEnd="18dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/card_stroke"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:background="@drawable/bg_home_icon_soft"
+                    android:contentDescription="@string/main_route"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_route"
+                    app:tint="@color/blue_primary" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="Ruta activa"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Cura Mori - Catacaos"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_home_route_pill"
+                    android:fontFamily="sans-serif-bold"
+                    android:paddingStart="12dp"
+                    android:paddingTop="7dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="7dp"
+                    android:text="S/ 3.00"
+                    android:textColor="@color/blue_deep"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="22dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-black"
+                android:text="Novedades"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_home_route_pill"
+                android:fontFamily="sans-serif-bold"
+                android:paddingStart="10dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="6dp"
+                android:text="Firebase"
+                android:textColor="@color/blue_deep"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/homeSliderScroll"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_marginTop="12dp"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/sliderItemsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <LinearLayout
+            android:id="@+id/sliderDotsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="22dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-black"
+                android:text="Ultimo viaje"
+                android:textColor="@color/text_primary"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+3 pts"
+                android:textColor="@color/blue_primary"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginEnd="18dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="22dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/card_stroke"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="15dp">
+
+                <ImageView
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_home_icon_soft"
+                    android:contentDescription="@string/trip_recorded"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_history"
+                    app:tint="@color/blue_primary" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-bold"
+                        android:text="Viaje registrado"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Escanea el QR al subir para sumar puntos"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:text="+3"
+                    android:textColor="@color/blue_primary"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="18dp"
+            app:cardBackgroundColor="@color/blue_soft"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="0dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="Escanea el QR de la unidad cada vez que viajes y asegura tus puntos."
+                android:textColor="@color/blue_deep"
+                android:textSize="13sp" />
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+
+
+
+
+

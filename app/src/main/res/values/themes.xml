@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.TaxiApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/green_dark</item>
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorSecondary">@color/yellow_points</item>
+    </style>
+
+    <style name="Theme.TaxiApp" parent="Base.Theme.TaxiApp" />
+
+    <style name="Widget.TaxiApp.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/input_background</item>
+        <item name="boxCornerRadiusBottomEnd">14dp</item>
+        <item name="boxCornerRadiusBottomStart">14dp</item>
+        <item name="boxCornerRadiusTopEnd">14dp</item>
+        <item name="boxCornerRadiusTopStart">14dp</item>
+        <item name="boxStrokeColor">@color/green_primary</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+    </style>
+
+    <style name="TextAppearance.TaxiApp.InfoLine" parent="@android:style/TextAppearance">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+</resources>
+

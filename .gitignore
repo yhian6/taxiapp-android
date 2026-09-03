@@ -1,0 +1,27 @@
+*.iml
+.gradle
+/local.properties
+local.properties
+/.idea/
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+
+# Android build outputs
+app/build/
+
+# Firebase local config for the real project
+app/google-services.json
+
+# Loose exported animation files. Keep app/src/main/assets instead.
+app/successful.json
+app/t6oHYiQic2.json
+

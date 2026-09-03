@@ -1,0 +1,35 @@
+[versions]
+agp = "8.13.2"
+firebaseBom = "34.14.0"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+material = "1.10.0"
+activity = "1.8.0"
+constraintlayout = "2.1.4"
+zxingEmbedded = "4.3.0"
+playServicesAuth = "21.2.0"
+facebookLogin = "17.0.2"
+lottie = "6.1.0"
+
+[libraries]
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-database = { module = "com.google.firebase:firebase-database" }
+google-play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+facebook-login = { module = "com.facebook.android:facebook-login", version.ref = "facebookLogin" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+zxing-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxingEmbedded" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+

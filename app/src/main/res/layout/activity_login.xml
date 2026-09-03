@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_light"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:paddingStart="30dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="30dp"
+        android:paddingBottom="28dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="66dp"
+            android:layout_height="66dp"
+            android:layout_gravity="center_horizontal"
+            app:cardBackgroundColor="@color/blue_primary"
+            app:cardCornerRadius="33dp"
+            app:cardElevation="4dp"
+            app:strokeWidth="0dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_logo"
+                android:padding="18dp"
+                android:src="@drawable/ic_taxiapp_logo"
+                app:tint="@color/white" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/blue_deep"
+            android:textSize="27sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="Inicie sesion para continuar"
+            android:textColor="@color/text_secondary"
+            android:textSize="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:text="Correo Electronico"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailInputLayout"
+            style="@style/Widget.TaxiApp.TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            app:boxBackgroundColor="@color/input_background"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/login_input_stroke"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_email"
+            app:startIconTint="@color/text_secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailInput"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Ingrese su correo"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingStart="0dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Contraseña"
+            android:textColor="@color/text_primary"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordInputLayout"
+            style="@style/Widget.TaxiApp.TextInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            app:boxBackgroundColor="@color/input_background"
+            app:boxBackgroundMode="outline"
+            app:boxCornerRadiusBottomEnd="10dp"
+            app:boxCornerRadiusBottomStart="10dp"
+            app:boxCornerRadiusTopEnd="10dp"
+            app:boxCornerRadiusTopStart="10dp"
+            app:boxStrokeColor="@color/login_input_stroke"
+            app:boxStrokeWidth="1dp"
+            app:boxStrokeWidthFocused="2dp"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/text_secondary"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_lock"
+            app:startIconTint="@color/text_secondary">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:hint="Ingrese su contraseña"
+                android:inputType="textPassword"
+                android:maxLines="1"
+                android:paddingStart="0dp"
+                android:paddingEnd="12dp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/forgotPasswordText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="end"
+            android:text="Olvidó su contraseña?"
+            android:textColor="@color/blue_primary"
+            android:textSize="12sp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="26dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Ingresar"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:backgroundTint="@color/blue_primary"
+            app:cornerRadius="18dp"
+            app:icon="@drawable/ic_arrow_right"
+            app:iconGravity="textEnd"
+            app:iconPadding="10dp"
+            app:iconTint="@color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/card_stroke" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:text="O CONTINUAR CON"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1"
+                android:background="@color/card_stroke" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/googleSignInButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="18dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="0dp"
+                app:strokeColor="@color/card_stroke"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Google"
+                    android:padding="13dp"
+                    android:src="@drawable/ic_google" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/facebookSignInButton"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                app:cardBackgroundColor="#1877F2"
+                app:cardCornerRadius="25dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="Facebook"
+                    android:padding="11dp"
+                    android:src="@drawable/ic_facebook" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="26dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No tiene una cuenta? "
+                android:textColor="@color/text_secondary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/registerText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Registrese aqui"
+                android:textColor="@color/blue_primary"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+
