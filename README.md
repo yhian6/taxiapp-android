@@ -24,6 +24,10 @@ Aplicacion movil Android para fidelizacion de pasajeros en una ruta de transport
 - Lottie Android
 - Material Components
 
+## Capturas
+
+Las pantallas principales estan en [docs/screenshots](docs/screenshots).
+
 ## Configuracion Firebase
 
 Este repositorio no incluye el archivo real `app/google-services.json` por seguridad.
