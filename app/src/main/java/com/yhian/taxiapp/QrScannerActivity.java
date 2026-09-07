@@ -55,6 +55,9 @@ public class QrScannerActivity extends AppCompatActivity {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private boolean hasScanned = false;
     private boolean isScannerRunning = false;
+    private boolean canRegisterPoints = true;
+    private boolean isCheckingPointsAvailability = false;
+    private long pointsCooldownRemainingMs = 0L;
 
     private String vehicleId = "";
     private String unitNumber = "Unidad";
@@ -119,7 +122,7 @@ public class QrScannerActivity extends AppCompatActivity {
 
         barcodeScannerView.setStatusText("");
         backButton.setOnClickListener(view -> finish());
-        confirmScannedTripButton.setOnClickListener(view -> registerTripFromScanner());
+        confirmScannedTripButton.setOnClickListener(view -> handleTripConfirmation());
         reportScannedTripButton.setOnClickListener(view -> openLinkedReport());
     }
 
@@ -132,6 +135,12 @@ public class QrScannerActivity extends AppCompatActivity {
 
         vehicleDetailsPanel.setVisibility(View.GONE);
         scannerStatusText.setText("Alinea el codigo dentro del marco");
+        canRegisterPoints = true;
+        isCheckingPointsAvailability = false;
+        pointsCooldownRemainingMs = 0L;
+        confirmScannedTripButton.setEnabled(true);
+        confirmScannedTripButton.setAlpha(1f);
+        confirmScannedTripButton.setText("Confirmar +3 pts");
         hasScanned = false;
         isScannerRunning = true;
         barcodeScannerView.decodeSingle(barcodeCallback);
@@ -169,34 +178,7 @@ public class QrScannerActivity extends AppCompatActivity {
             return;
         }
 
-        // Primero verificamos si el usuario ya escaneó esta unidad recientemente
-        FirebaseRefs.root().child("pasajeros").child(currentUser.getUid())
-                .child("ultimos_escaneos").child(qrCode)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        if (snapshot.exists()) {
-                            Long lastScanTime = snapshot.getValue(Long.class);
-                            if (lastScanTime != null) {
-                                long currentTime = System.currentTimeMillis();
-                                long diff = currentTime - lastScanTime;
-
-                                if (diff < SCAN_COOLDOWN_MS) {
-                                    showCooldownAlert(SCAN_COOLDOWN_MS - diff);
-                                    return;
-                                }
-                            }
-                        }
-                        
-                        // Si no hay escaneo reciente, procedemos a validar la unidad en el nodo vehiculos
-                        fetchVehicleData(qrCode);
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        fetchVehicleData(qrCode);
-                    }
-                });
+        fetchVehicleData(qrCode);
     }
 
     private void fetchVehicleData(String qrCode) {
@@ -237,10 +219,10 @@ public class QrScannerActivity extends AppCompatActivity {
         unitNumber = getStringValue(snapshot, "numeroUnidad", "Unidad");
         plate = getStringValue(snapshot, "placa", "Sin placa");
         
-        // Buscamos el nombre del vehiculo (marca/modelo) en varios campos posibles
-        vehicleName = firstStringValue(snapshot, "marca", "auto", "vehiculoNombre", "");
+        // Soporta el campo nuevo del panel admin y datos antiguos ya registrados.
+        vehicleName = firstStringValue(snapshot, "carro", "auto", "vehiculoNombre", "");
         if (vehicleName.isEmpty()) {
-            vehicleName = firstStringValue(snapshot, "nombreVehiculo", "modelo", "", "Vehiculo del comite");
+            vehicleName = firstStringValue(snapshot, "nombreVehiculo", "marca", "modelo", "Vehiculo del comite");
         }
         
         driverId = getStringValue(snapshot, "conductorId", "");
@@ -297,43 +279,94 @@ public class QrScannerActivity extends AppCompatActivity {
                 .translationY(0f)
                 .setDuration(260)
                 .start();
+        isCheckingPointsAvailability = true;
+        confirmScannedTripButton.setEnabled(false);
+        confirmScannedTripButton.setAlpha(0.72f);
+        confirmScannedTripButton.setText("Verificando...");
+        checkPointsAvailability();
     }
 
     private void restartScannerDelayed() {
         handler.postDelayed(this::startQrScanner, 1300L);
     }
 
-    private void showCooldownAlert(long remainingMillis) {
-        androidx.appcompat.app.AlertDialog dialog = new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
-                .setTitle("Viaje reciente detectado")
-                .setMessage("Calculando tiempo restante...")
-                .setIcon(R.drawable.ic_points)
-                .setPositiveButton("Volver al Inicio", (d, which) -> finish())
-                .setCancelable(false)
-                .create();
+    private void checkPointsAvailability() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null || vehicleId.trim().isEmpty()) {
+            return;
+        }
 
-        dialog.show();
+        FirebaseRefs.root().child("pasajeros").child(currentUser.getUid())
+                .child("ultimos_escaneos").child(vehicleId)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        Long lastScanTime = snapshot.getValue(Long.class);
+                        long remainingMillis = getRemainingCooldown(lastScanTime);
+                        updatePointsButtonState(remainingMillis);
+                    }
 
-        new android.os.CountDownTimer(remainingMillis, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                long minutes = (millisUntilFinished / (1000 * 60)) % 60;
-                long seconds = (millisUntilFinished / 1000) % 60;
-                
-                String message = String.format("Ya registraste esta unidad hace poco. Por seguridad, debes esperar:\n\n%02d min y %02d seg\n\npara volver a sumar puntos.", minutes, seconds);
-                dialog.setMessage(message);
-            }
-
-            @Override
-            public void onFinish() {
-                dialog.setMessage("¡Ya puedes volver a escanear esta unidad!");
-                dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setText("Reintentar ahora");
-                dialog.getButton(androidx.appcompat.app.AlertDialog.BUTTON_POSITIVE).setOnClickListener(v -> {
-                    dialog.dismiss();
-                    startQrScanner();
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        updatePointsButtonState(0L);
+                    }
                 });
-            }
-        }.start();
+    }
+
+    private long getRemainingCooldown(Long lastScanTime) {
+        if (lastScanTime == null) {
+            return 0L;
+        }
+
+        long elapsed = System.currentTimeMillis() - lastScanTime;
+        return Math.max(0L, SCAN_COOLDOWN_MS - elapsed);
+    }
+
+    private void updatePointsButtonState(long remainingMillis) {
+        isCheckingPointsAvailability = false;
+        pointsCooldownRemainingMs = remainingMillis;
+        canRegisterPoints = remainingMillis <= 0L;
+        confirmScannedTripButton.setEnabled(true);
+
+        if (canRegisterPoints) {
+            confirmScannedTripButton.setText("Confirmar +3 pts");
+            confirmScannedTripButton.setAlpha(1f);
+            return;
+        }
+
+        confirmScannedTripButton.setText("Puntos en " + formatCooldownShort(remainingMillis));
+        confirmScannedTripButton.setAlpha(0.72f);
+    }
+
+    private String formatCooldownShort(long millis) {
+        long totalMinutes = Math.max(1L, (long) Math.ceil(millis / 60000.0));
+        return totalMinutes == 1L ? "1 min" : totalMinutes + " min";
+    }
+
+    private void handleTripConfirmation() {
+        if (isCheckingPointsAvailability) {
+            Toast.makeText(this, "Estamos validando tus puntos, espera un momento", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!canRegisterPoints) {
+            showCooldownAlert(pointsCooldownRemainingMs);
+            return;
+        }
+
+        registerTripFromScanner();
+    }
+
+    private void showCooldownAlert(long remainingMillis) {
+        String timeText = formatCooldownShort(remainingMillis);
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(this)
+                .setTitle("Tus puntos ya fueron registrados")
+                .setMessage("Ya ganaste los 3 puntos de este viaje. Podras volver a sumar puntos en esta unidad dentro de "
+                        + timeText + ".\n\nSi hubo algun problema con el conductor o el servicio, puedes enviar un reporte ahora.")
+                .setIcon(R.drawable.ic_points)
+                .setNegativeButton("Cerrar", null)
+                .setPositiveButton("Reportar ahora", (dialog, which) -> openLinkedReport())
+                .show();
     }
 
     private void registerTripFromScanner() {
@@ -527,9 +560,6 @@ public class QrScannerActivity extends AppCompatActivity {
         return Math.round(dp * getResources().getDisplayMetrics().density);
     }
 }
-
-
-
 
 
 

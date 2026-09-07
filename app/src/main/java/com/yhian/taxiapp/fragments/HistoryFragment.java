@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,8 +39,28 @@ public class HistoryFragment extends Fragment {
     private TextView emptyStateText;
     private TextView totalTripsText;
     private TextView totalPointsText;
+    private TextView filterText;
+    private TextView summaryLabelText;
     private DatabaseReference historyReference;
     private ValueEventListener historyListener;
+    private final List<TripItem> allTrips = new ArrayList<>();
+    private HistoryFilter currentFilter = HistoryFilter.ALL;
+
+    private enum HistoryFilter {
+        ALL("Todo", "TOTAL VIAJES REGISTRADOS"),
+        TODAY("Hoy", "TOTAL VIAJES HOY"),
+        WEEK("Esta semana", "TOTAL VIAJES ESTA SEMANA"),
+        FIFTEEN_DAYS("Ultimos 15 dias", "TOTAL VIAJES EN 15 DIAS"),
+        MONTH("Este mes", "TOTAL VIAJES ESTE MES");
+
+        final String label;
+        final String summaryLabel;
+
+        HistoryFilter(String label, String summaryLabel) {
+            this.label = label;
+            this.summaryLabel = summaryLabel;
+        }
+    }
 
     @Nullable
     @Override
@@ -56,6 +77,11 @@ public class HistoryFragment extends Fragment {
         emptyStateText = view.findViewById(R.id.historyEmptyText);
         totalTripsText = view.findViewById(R.id.historyTotalTripsText);
         totalPointsText = view.findViewById(R.id.historyTotalPointsText);
+        filterText = view.findViewById(R.id.historyFilterText);
+        summaryLabelText = view.findViewById(R.id.historySummaryLabelText);
+        ImageButton filterButton = view.findViewById(R.id.historyFilterButton);
+
+        filterButton.setOnClickListener(v -> showFilterDialog());
 
         loadHistory();
     }
@@ -76,7 +102,7 @@ public class HistoryFragment extends Fragment {
         historyListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<TripItem> trips = new ArrayList<>();
+                allTrips.clear();
 
                 for (DataSnapshot tripSnapshot : snapshot.getChildren()) {
                     TripItem trip = tripSnapshot.getValue(TripItem.class);
@@ -85,12 +111,12 @@ public class HistoryFragment extends Fragment {
                         if (trip.getId() == null) {
                             trip.setId(tripSnapshot.getKey());
                         }
-                        trips.add(trip);
+                        allTrips.add(trip);
                     }
                 }
 
-                Collections.sort(trips, (first, second) -> Long.compare(second.getFecha(), first.getFecha()));
-                renderTrips(trips);
+                Collections.sort(allTrips, (first, second) -> Long.compare(second.getFecha(), first.getFecha()));
+                renderTrips();
             }
 
             @Override
@@ -102,28 +128,105 @@ public class HistoryFragment extends Fragment {
         historyReference.addValueEventListener(historyListener);
     }
 
-    private void renderTrips(List<TripItem> trips) {
+    private void renderTrips() {
         historyContainer.removeAllViews();
+        List<TripItem> trips = getFilteredTrips();
+
+        filterText.setText("Filtro: " + currentFilter.label);
+        summaryLabelText.setText(currentFilter.summaryLabel);
 
         if (trips.isEmpty()) {
             totalTripsText.setText("0");
             totalPointsText.setText("0 pts");
-            showEmptyState("Aun no tienes viajes registrados.");
+            showEmptyState(allTrips.isEmpty()
+                    ? "Aun no tienes viajes registrados."
+                    : "No hay viajes en este filtro.");
             return;
         }
 
         emptyStateText.setVisibility(View.GONE);
 
-        int monthlyTrips = 0;
         for (TripItem trip : trips) {
-            if (isCurrentMonth(trip.getFecha())) {
-                monthlyTrips++;
-            }
             historyContainer.addView(createTripCard(trip));
         }
 
-        totalTripsText.setText(String.valueOf(monthlyTrips));
+        totalTripsText.setText(String.valueOf(trips.size()));
         totalPointsText.setText((trips.size() * 3) + " pts");
+    }
+
+    private void showFilterDialog() {
+        String[] options = {"Todo", "Hoy", "Esta semana", "Ultimos 15 dias", "Este mes"};
+        HistoryFilter[] filters = {
+                HistoryFilter.ALL,
+                HistoryFilter.TODAY,
+                HistoryFilter.WEEK,
+                HistoryFilter.FIFTEEN_DAYS,
+                HistoryFilter.MONTH
+        };
+
+        int selectedIndex = 0;
+        for (int i = 0; i < filters.length; i++) {
+            if (filters[i] == currentFilter) {
+                selectedIndex = i;
+                break;
+            }
+        }
+
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                .setTitle("Filtrar historial")
+                .setSingleChoiceItems(options, selectedIndex, (dialog, which) -> {
+                    currentFilter = filters[which];
+                    renderTrips();
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cerrar", null)
+                .show();
+    }
+
+    private List<TripItem> getFilteredTrips() {
+        if (currentFilter == HistoryFilter.ALL) {
+            return new ArrayList<>(allTrips);
+        }
+
+        List<TripItem> filteredTrips = new ArrayList<>();
+        long startTime = getFilterStartTime(currentFilter);
+
+        for (TripItem trip : allTrips) {
+            if (trip.getFecha() >= startTime) {
+                filteredTrips.add(trip);
+            }
+        }
+
+        return filteredTrips;
+    }
+
+    private long getFilterStartTime(HistoryFilter filter) {
+        Calendar calendar = Calendar.getInstance();
+
+        if (filter == HistoryFilter.TODAY) {
+            calendar.set(Calendar.HOUR_OF_DAY, 0);
+            calendar.set(Calendar.MINUTE, 0);
+            calendar.set(Calendar.SECOND, 0);
+            calendar.set(Calendar.MILLISECOND, 0);
+            return calendar.getTimeInMillis();
+        }
+
+        if (filter == HistoryFilter.WEEK) {
+            calendar.add(Calendar.DAY_OF_YEAR, -7);
+            return calendar.getTimeInMillis();
+        }
+
+        if (filter == HistoryFilter.FIFTEEN_DAYS) {
+            calendar.add(Calendar.DAY_OF_YEAR, -15);
+            return calendar.getTimeInMillis();
+        }
+
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTimeInMillis();
     }
 
     private View createTripCard(TripItem trip) {
@@ -160,18 +263,6 @@ public class HistoryFragment extends Fragment {
         intent.putExtra(TripDetailActivity.EXTRA_DRIVER_NAME, valueOrDefault(trip.getConductorNombre(), "Conductor no asignado"));
         intent.putExtra(TripDetailActivity.EXTRA_DRIVER_PHONE, valueOrDefault(trip.getConductorCelular(), ""));
         startActivity(intent);
-    }
-
-    private boolean isCurrentMonth(long timestamp) {
-        if (timestamp <= 0) {
-            return false;
-        }
-
-        Calendar tripDate = Calendar.getInstance();
-        tripDate.setTimeInMillis(timestamp);
-        Calendar today = Calendar.getInstance();
-        return tripDate.get(Calendar.YEAR) == today.get(Calendar.YEAR)
-                && tripDate.get(Calendar.MONTH) == today.get(Calendar.MONTH);
     }
 
     private void showEmptyState(String message) {

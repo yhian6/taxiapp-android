@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="13dp"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/surface_card"
     app:cardCornerRadius="16dp"
     app:cardElevation="2dp"
     app:strokeColor="@color/card_stroke"
@@ -38,7 +38,7 @@
                     android:fontFamily="sans-serif-black"
                     android:lineSpacingExtra="1dp"
                     android:text="Cura Mori - Catacaos"
-                    android:textColor="@color/blue_deep"
+                    android:textColor="@color/text_primary"
                     android:textSize="17sp" />
 
                 <TextView
@@ -101,7 +101,7 @@
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 android:text="Ver Detalle"
-                android:textColor="@color/blue_deep"
+                android:textColor="@color/blue_primary"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 

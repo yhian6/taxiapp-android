@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="190dp"
     app:cardCornerRadius="26dp"
-    app:cardElevation="6dp"
+    app:cardElevation="8dp"
     app:strokeWidth="0dp">
 
     <FrameLayout
@@ -58,7 +58,7 @@
                 android:paddingEnd="12dp"
                 android:paddingBottom="6dp"
                 android:text="Ver detalle"
-                android:textColor="@color/white"
+                android:textColor="@color/blue_deep"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

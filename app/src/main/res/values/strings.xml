@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">TaxiApp</string>
     <string name="app_logo">Logo de TaxiApp</string>
-    <string name="committee_name">Cucungara Express</string>
+    <string name="committee_name">TransPiura</string>
     <string name="splash_tagline">Viaja, escanea y gana puntos</string>
     <string name="main_route">Cura Mori - Catacaos</string>
     <string name="welcome_next_screen">Siguiente pantalla: Bienvenida</string>
@@ -70,14 +70,14 @@
     <string name="home_points_value">2,450</string>
     <string name="home_status_silver">Nivel Silver • 120 pts para Gold</string>
     <string name="report_title">Reportar problema</string>
-    <string name="report_subtitle">Ayudanos a mejorar el servicio de Cucungara Express.</string>
-    <string name="report_vehicle_general">Vehiculo: reporte general</string>
+    <string name="report_subtitle">Ayúdanos a mejorar el servicio de TransPiura.</string>
+    <string name="report_vehicle_general">Vehículo: reporte general</string>
     <string name="report_driver_pending">Conductor: pendiente de QR</string>
     <string name="report_type_label">Tipo de problema</string>
     <string name="report_description_hint">Describe lo ocurrido</string>
     <string name="send_report_button">Enviar reporte</string>
     <string name="qr_title">Escanea el QR</string>
-    <string name="qr_subtitle">Apunta la camara al codigo de la unidad.</string>
+    <string name="qr_subtitle">Apunta la cámara al código de la unidad.</string>
     <string name="scan_camera_button">Escanear con camara</string>
     <string name="qr_manual_title">Codigo del vehiculo</string>
     <string name="qr_manual_subtitle">Tambien puedes ingresar el codigo manualmente si el QR no se lee.</string>

@@ -108,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="@color/surface_card"
             app:cardCornerRadius="16dp"
             app:cardElevation="1dp"
             app:strokeColor="@color/card_stroke"
@@ -170,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="Cura Mori"
-                            android:textColor="@color/blue_deep"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -189,7 +189,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
                             android:text="Catacaos"
-                            android:textColor="@color/blue_deep"
+                            android:textColor="@color/text_primary"
                             android:textSize="15sp"
                             android:textStyle="bold" />
 
@@ -230,7 +230,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="3dp"
                             android:text="+3 puntos"
-                            android:textColor="@color/blue_deep"
+                            android:textColor="@color/text_primary"
                             android:textSize="20sp"
                             android:textStyle="bold" />
 
@@ -258,7 +258,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="@color/surface_card"
             app:cardCornerRadius="16dp"
             app:cardElevation="1dp"
             app:strokeColor="@color/card_stroke"
@@ -288,7 +288,7 @@
                     android:layout_marginTop="12dp"
                     android:fontFamily="sans-serif-black"
                     android:text="P1A-234"
-                    android:textColor="@color/blue_deep"
+                    android:textColor="@color/text_primary"
                     android:textSize="22sp" />
 
                 <TextView
@@ -308,7 +308,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="@color/surface_card"
             app:cardCornerRadius="16dp"
             app:cardElevation="1dp"
             app:strokeColor="@color/card_stroke"
@@ -351,7 +351,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:text="Carlos Mendoza"
-                        android:textColor="@color/blue_deep"
+                        android:textColor="@color/text_primary"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 

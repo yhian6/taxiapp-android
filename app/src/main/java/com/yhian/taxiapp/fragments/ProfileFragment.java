@@ -31,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.yhian.taxiapp.LoginActivity;
+import com.yhian.taxiapp.MyReportsActivity;
 import com.yhian.taxiapp.R;
 import com.yhian.taxiapp.utils.FirebaseRefs;
 
@@ -76,6 +77,7 @@ public class ProfileFragment extends Fragment {
         darkModeSwitch = view.findViewById(R.id.darkModeSwitch);
         TextView editButton = view.findViewById(R.id.editProfileButton);
         changePasswordCard = view.findViewById(R.id.changePasswordCard);
+        MaterialCardView myReportsCard = view.findViewById(R.id.myReportsCard);
         MaterialButton logoutButton = view.findViewById(R.id.logoutButton);
 
         setupDarkMode();
@@ -83,6 +85,7 @@ public class ProfileFragment extends Fragment {
 
         editButton.setOnClickListener(v -> showEditProfileDialog());
         changePasswordCard.setOnClickListener(v -> sendPasswordReset());
+        myReportsCard.setOnClickListener(v -> startActivity(new Intent(requireContext(), MyReportsActivity.class)));
         logoutButton.setOnClickListener(v -> showLogoutConfirmation());
     }
 

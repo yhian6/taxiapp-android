@@ -13,13 +13,20 @@
         android:orientation="vertical"
         android:paddingBottom="34dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_home_header_curve"
+            android:orientation="vertical"
+            android:paddingBottom="28dp">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="22dp"
-            android:paddingTop="30dp"
+            android:paddingTop="28dp"
             android:paddingEnd="22dp"
-            android:paddingBottom="18dp">
+            android:paddingBottom="20dp">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -35,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
                     android:text="@string/home_greeting_default"
-                    android:textColor="@color/text_primary"
+                    android:textColor="@color/white"
                     android:textSize="25sp" />
 
                 <TextView
@@ -44,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
                     android:text="Tus viajes ahora tienen recompensa."
-                    android:textColor="@color/text_secondary"
+                    android:textColor="@color/white_85"
                     android:textSize="13sp" />
             </LinearLayout>
 
@@ -54,11 +61,10 @@
                 android:layout_height="48dp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                app:cardBackgroundColor="@color/white"
+                app:cardBackgroundColor="@color/surface_card"
                 app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
-                app:strokeColor="@color/card_stroke"
-                app:strokeWidth="1dp">
+                app:cardElevation="4dp"
+                app:strokeWidth="0dp">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -75,9 +81,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
+            android:layout_marginTop="0dp"
             android:layout_marginEnd="18dp"
             app:cardCornerRadius="26dp"
-            app:cardElevation="10dp"
+            app:cardElevation="8dp"
             app:strokeWidth="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -190,14 +197,16 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        </LinearLayout>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="118dp"
             android:layout_marginStart="42dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="34dp"
             android:layout_marginEnd="42dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="0dp"
+            app:cardElevation="8dp"
             app:strokeWidth="0dp">
 
             <com.google.android.material.button.MaterialButton
@@ -227,9 +236,9 @@
             android:layout_marginStart="18dp"
             android:layout_marginTop="22dp"
             android:layout_marginEnd="18dp"
-            app:cardBackgroundColor="@color/white"
+            app:cardBackgroundColor="@color/surface_card"
             app:cardCornerRadius="22dp"
-            app:cardElevation="0dp"
+            app:cardElevation="2dp"
             app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
@@ -292,7 +301,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="22dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -306,18 +315,6 @@
                 android:textColor="@color/text_primary"
                 android:textSize="20sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_home_route_pill"
-                android:fontFamily="sans-serif-bold"
-                android:paddingStart="10dp"
-                android:paddingTop="6dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="6dp"
-                android:text="Firebase"
-                android:textColor="@color/blue_deep"
-                android:textSize="11sp" />
         </LinearLayout>
 
         <HorizontalScrollView
@@ -325,6 +322,8 @@
             android:layout_width="match_parent"
             android:layout_height="190dp"
             android:layout_marginTop="12dp"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:scrollbars="none">
@@ -364,22 +363,36 @@
                 android:textSize="20sp" />
 
             <TextView
+                android:id="@+id/viewHistoryText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+3 pts"
+                android:background="@drawable/bg_home_route_pill"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="sans-serif-bold"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:minHeight="34dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:gravity="center"
+                android:text="Ver mas"
                 android:textColor="@color/blue_primary"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/latestTripCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
             android:layout_marginEnd="18dp"
-            app:cardBackgroundColor="@color/white"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            app:cardBackgroundColor="@color/surface_card"
             app:cardCornerRadius="22dp"
-            app:cardElevation="0dp"
+            app:cardElevation="2dp"
             app:strokeColor="@color/card_stroke"
             app:strokeWidth="1dp">
 
@@ -407,14 +420,16 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/latestTripTitleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-bold"
-                        android:text="Viaje registrado"
+                        android:text="Aun no hay viajes"
                         android:textColor="@color/text_primary"
                         android:textSize="15sp" />
 
                     <TextView
+                        android:id="@+id/latestTripSubtitleText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
@@ -424,6 +439,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/latestTripPointsText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-black"
@@ -450,19 +466,12 @@
                 android:gravity="center"
                 android:padding="16dp"
                 android:text="Escanea el QR de la unidad cada vez que viajes y asegura tus puntos."
-                android:textColor="@color/blue_deep"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp" />
         </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
 </ScrollView>
-
-
-
-
-
-
-
 
 

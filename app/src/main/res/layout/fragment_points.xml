@@ -108,7 +108,7 @@
                     android:paddingEnd="14dp"
                     android:paddingBottom="8dp"
                     android:text="Cada viaje suma 3 puntos"
-                    android:textColor="@color/blue_deep"
+                    android:textColor="@color/blue_primary"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 

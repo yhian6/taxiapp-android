@@ -17,6 +17,7 @@
 
     <!-- Backgrounds & Surfaces -->
     <color name="background_light">#F8FAFC</color>
+    <color name="surface_card">#FFFFFF</color>
     <color name="input_background">#F1F5F9</color>
     <color name="card_stroke">#E2E8F0</color>
 

@@ -68,6 +68,9 @@
             android:name=".TripDetailActivity"
             android:exported="false" />
         <activity
+            android:name=".MyReportsActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
     </application>

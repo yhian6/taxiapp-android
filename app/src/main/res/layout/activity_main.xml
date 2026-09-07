@@ -17,7 +17,7 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="76dp"
-        android:background="@color/white"
+        android:background="@color/surface_card"
         android:elevation="14dp"
         app:itemIconTint="@color/bottom_nav_selector"
         app:itemRippleColor="@color/nav_ripple"

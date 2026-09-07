@@ -24,19 +24,23 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.yhian.taxiapp.QrScannerActivity;
 import com.yhian.taxiapp.MainActivity;
 import com.yhian.taxiapp.R;
 import com.yhian.taxiapp.SliderDetailActivity;
+import com.yhian.taxiapp.TripDetailActivity;
 import com.yhian.taxiapp.models.SliderItem;
+import com.yhian.taxiapp.models.TripItem;
 import com.yhian.taxiapp.utils.FirebaseRefs;
 import com.yhian.taxiapp.utils.ImageLoader;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
 
@@ -48,6 +52,10 @@ public class HomeFragment extends Fragment {
     private TextView pointsText;
     private TextView tripsText;
     private TextView statusText;
+    private TextView latestTripTitleText;
+    private TextView latestTripSubtitleText;
+    private TextView latestTripPointsText;
+    private View latestTripCard;
     private LinearProgressIndicator pointsProgress;
     private HorizontalScrollView homeSliderScroll;
     private LinearLayout sliderItemsContainer;
@@ -65,9 +73,12 @@ public class HomeFragment extends Fragment {
     private DatabaseReference passengerReference;
     private DatabaseReference sliderReference;
     private DatabaseReference rewardsReference;
+    private DatabaseReference latestTripReference;
     private ValueEventListener passengerListener;
     private ValueEventListener sliderListener;
     private ValueEventListener rewardsListener;
+    private ValueEventListener latestTripListener;
+    private TripItem latestTrip;
 
     @Nullable
     @Override
@@ -84,12 +95,17 @@ public class HomeFragment extends Fragment {
         pointsText = view.findViewById(R.id.pointsText);
         tripsText = view.findViewById(R.id.tripsText);
         statusText = view.findViewById(R.id.statusText);
+        latestTripTitleText = view.findViewById(R.id.latestTripTitleText);
+        latestTripSubtitleText = view.findViewById(R.id.latestTripSubtitleText);
+        latestTripPointsText = view.findViewById(R.id.latestTripPointsText);
+        latestTripCard = view.findViewById(R.id.latestTripCard);
         pointsProgress = view.findViewById(R.id.pointsProgress);
         homeSliderScroll = view.findViewById(R.id.homeSliderScroll);
         sliderItemsContainer = view.findViewById(R.id.sliderItemsContainer);
         sliderDotsContainer = view.findViewById(R.id.sliderDotsContainer);
         MaterialButton scanButton = view.findViewById(R.id.scanQrButton);
         TextView viewRewardsText = view.findViewById(R.id.viewRewardsText);
+        TextView viewHistoryText = view.findViewById(R.id.viewHistoryText);
 
         scanButton.setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), QrScannerActivity.class)));
@@ -98,8 +114,11 @@ public class HomeFragment extends Fragment {
                 ((MainActivity) requireActivity()).openPointsRewards();
             }
         });
+        viewHistoryText.setOnClickListener(v -> openHistory());
+        latestTripCard.setOnClickListener(v -> openLatestTripDetail());
 
         loadPassengerData();
+        loadLatestTripData();
         loadSliderData();
         loadRewardsGoalData();
     }
@@ -143,6 +162,71 @@ public class HomeFragment extends Fragment {
         };
 
         passengerReference.addValueEventListener(passengerListener);
+    }
+
+    private void loadLatestTripData() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (currentUser == null) {
+            renderLatestTrip(null);
+            return;
+        }
+
+        latestTripReference = FirebaseRefs.root()
+                .child("pasajeros")
+                .child(currentUser.getUid())
+                .child("viajes_historial");
+
+        latestTripListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                TripItem newestTrip = null;
+
+                for (DataSnapshot tripSnapshot : snapshot.getChildren()) {
+                    TripItem trip = tripSnapshot.getValue(TripItem.class);
+                    if (trip == null) {
+                        continue;
+                    }
+
+                    if (trip.getId() == null) {
+                        trip.setId(tripSnapshot.getKey());
+                    }
+
+                    if (newestTrip == null || trip.getFecha() > newestTrip.getFecha()) {
+                        newestTrip = trip;
+                    }
+                }
+
+                renderLatestTrip(newestTrip);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                latestTripTitleText.setText("No se pudo cargar");
+                latestTripSubtitleText.setText("Revisa tu conexion e intenta nuevamente");
+                latestTripPointsText.setText("");
+            }
+        };
+
+        latestTripReference.addValueEventListener(latestTripListener);
+    }
+
+    private void renderLatestTrip(@Nullable TripItem trip) {
+        latestTrip = trip;
+
+        if (trip == null) {
+            latestTripTitleText.setText("Aun no hay viajes");
+            latestTripSubtitleText.setText("Escanea el QR al subir para sumar puntos");
+            latestTripPointsText.setText("+3");
+            latestTripCard.setAlpha(0.82f);
+            return;
+        }
+
+        latestTripCard.setAlpha(1f);
+        latestTripTitleText.setText(valueOrDefault(trip.getRuta(), "Cura Mori - Catacaos"));
+        latestTripSubtitleText.setText(formatTripDate(trip.getFecha()) + " · "
+                + valueOrDefault(trip.getPlaca(), "Sin placa"));
+        latestTripPointsText.setText("+3");
     }
 
     private void updatePointsProgress() {
@@ -389,6 +473,45 @@ public class HomeFragment extends Fragment {
         startActivity(intent);
     }
 
+    private void openHistory() {
+        if (requireActivity() instanceof MainActivity) {
+            ((MainActivity) requireActivity()).openHistory();
+        }
+    }
+
+    private void openLatestTripDetail() {
+        if (latestTrip == null) {
+            openHistory();
+            return;
+        }
+
+        Intent intent = new Intent(requireContext(), TripDetailActivity.class);
+        intent.putExtra(TripDetailActivity.EXTRA_DATE, latestTrip.getFecha());
+        intent.putExtra(TripDetailActivity.EXTRA_PLATE, valueOrDefault(latestTrip.getPlaca(), "Sin placa"));
+        intent.putExtra(TripDetailActivity.EXTRA_VEHICLE_ID, valueOrDefault(latestTrip.getVehiculoId(), ""));
+        intent.putExtra(TripDetailActivity.EXTRA_VEHICLE_NAME, valueOrDefault(latestTrip.getVehiculoNombre(), "Vehiculo del comite"));
+        intent.putExtra(TripDetailActivity.EXTRA_UNIT_NUMBER, valueOrDefault(latestTrip.getNumeroUnidad(), "Unidad"));
+        intent.putExtra(TripDetailActivity.EXTRA_DRIVER_ID, valueOrDefault(latestTrip.getConductorId(), ""));
+        intent.putExtra(TripDetailActivity.EXTRA_DRIVER_NAME, valueOrDefault(latestTrip.getConductorNombre(), "Conductor no asignado"));
+        intent.putExtra(TripDetailActivity.EXTRA_DRIVER_PHONE, valueOrDefault(latestTrip.getConductorCelular(), ""));
+        startActivity(intent);
+    }
+
+    private String formatTripDate(long timestamp) {
+        if (timestamp <= 0) {
+            return "Fecha pendiente";
+        }
+
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MMM, hh:mm a", new Locale("es", "PE"));
+        return formatter.format(new Date(timestamp))
+                .replace("a. m.", "AM")
+                .replace("p. m.", "PM");
+    }
+
+    private String valueOrDefault(String value, String fallback) {
+        return value != null && !value.trim().isEmpty() ? value : fallback;
+    }
+
     private String getFirstName(String fullName) {
         if (fullName == null || fullName.trim().isEmpty()) {
             return "pasajero";
@@ -413,9 +536,11 @@ public class HomeFragment extends Fragment {
             rewardsReference.removeEventListener(rewardsListener);
         }
 
+        if (latestTripReference != null && latestTripListener != null) {
+            latestTripReference.removeEventListener(latestTripListener);
+        }
+
         sliderHandler.removeCallbacks(sliderRunnable);
     }
 }
-
-
 
